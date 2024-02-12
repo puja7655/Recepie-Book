@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xs-12">
+        <img [src]="recepieReceivedFromParentList.imgPath" alt="{{recepieReceivedFromParentList.imgPath}}"
+            class="img-responsive" style="max-height: 300px;">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>{{recepieReceivedFromParentList.name}}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!-- appDrpdown is a directive created to add class="open" or class="close" (basically toggle between them )dynamically 
+        on the elements it is applied  -->
+        <div class="btn-group" appDrpdown>
+            <button type="button" class="btn btn-primary dropdown-toggle">Manage <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a style="cursor: pointer;" (click)="onAddToShoppingList()">Add to shopping list</a></li>
+                <li><a href="#">Edit recepie</a></li>
+                <li><a href="#">Delete recepie</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">{{recepieReceivedFromParentList.description}}</div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let ingredient of recepieReceivedFromParentList.ingredient">
+                {{ingredient.name}} - {{ingredient.amount}}
+            </li>
+        </ul>
+    </div> 
+</div>

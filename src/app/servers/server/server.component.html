@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sx-12">
+            <label>user name :</label>
+            <input tyep="text" class="form-control" [(ngModel)]="name">
+            <P> {{name}}</P>
+            <!-- 
+           <button class="btn btn-primary" [disabled]="name===''" (click)="onClickButton()">Reset user</button> -->
+
+            <button class="btn btn-primary" [disabled]="name===''" (click)="name=''">Reset user</button>
+
+
+            <button class="btn btn-primary" (click)="onClickButton()">Display Details</button>
+            <p *ngIf="!displayParagraph">Secret password=Tuna</p>
+            <div *ngFor="let item of arr index as i"
+                [ngStyle]="{backgroundColor:i>5?'blue':'transparent'}"
+                [ngClass]="{online:i>5}">
+                {{item}}
+            </div>
+        </div>
+    </div>
+</div>

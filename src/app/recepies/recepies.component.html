@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-5">
+        <app-recepies-list></app-recepies-list>
+    </div>
+    <div class="col-md-7">
+        <app-recepies-detail *ngIf="selectedRecepie; else infoTech" [recepieReceivedFromParentList]="selectedRecepie"></app-recepies-detail>
+        <ng-template #infoTech>
+            <p>Please select a Recepie!</p>
+        </ng-template>
+    </div>
+</div>
