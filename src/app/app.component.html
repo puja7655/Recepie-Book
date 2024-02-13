@@ -1,10 +1,13 @@
 <!-- <app-server></app-server> -->
-<app-header (featureSelected)="onNavigate($event)"></app-header>
+<app-header></app-header>
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <app-recepies *ngIf="loadedFeature==='recepie'"></app-recepies>
-      <app-shopping-list *ngIf="loadedFeature!=='recepie'"></app-shopping-list>
+      <!-- NO need of ngIf now . instead we can use router-outlet to specify the location of render -->
+      <!-- <app-recepies *ngIf="loadedFeature==='recepie'"></app-recepies>
+      <app-shopping-list *ngIf="loadedFeature!=='recepie'"></app-shopping-list> -->
+
+     <router-outlet></router-outlet>
     </div>
   </div>
 </div>
@@ -32,4 +35,3 @@ Assignment
 
 
 <app-assignment></app-assignment>
-<router-outlet />
