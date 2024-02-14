@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { recepie } from '../recepie.model';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecepieService } from '../recepie.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class RecepiesDetailComponent implements OnInit {
   id: number;
   constructor(private shoppingListService: ShoppingListService,
     private recepieService: RecepieService,
+    private router: Router,
     private route: ActivatedRoute) { }
   ngOnInit(): void {
     /* 
@@ -26,9 +27,18 @@ export class RecepiesDetailComponent implements OnInit {
       .subscribe(
         (param: Params) => {
           this.id = +param['id']
-          this.recepie=this.recepieService.getRecepieByIndex(this.id)
+          this.recepie = this.recepieService.getRecepieByIndex(this.id)
         })
   }
+
+  onEditRecepie() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+    /*Here we are going one level up , then setting id in the Url and the adding edit but in the above way since 
+      *we are already in details page id is already present in the usrl we just need to add edit in the url*/
+     
+    //this.router.navigate(['../',this.id,'edit'],{relativeTo:this.route})
+  }
+
   onAddToShoppingList() {
     this.shoppingListService.AddIngredientsToShoppingList(this.recepie.ingredient)
   }
