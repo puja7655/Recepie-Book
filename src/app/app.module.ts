@@ -20,6 +20,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { ActiveComponent } from './assignment/active/active.component';
 import { InActiveComponent } from './assignment/in-active/in-active.component';
 import { AssignmentComponent } from './assignment/assignment.component';
+import { RecepieStartComponent } from './recepies/recepie-start/recepie-start.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AssignmentComponent } from './assignment/assignment.component';
     DropdownDirective,
     ActiveComponent,
     InActiveComponent,
-    AssignmentComponent
+    AssignmentComponent,
+    RecepieStartComponent
   ],
   imports: [
     BrowserModule,

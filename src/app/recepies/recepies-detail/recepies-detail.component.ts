@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { recepie } from '../recepie.model';
-import { Ingredients } from '../../shared/ingredients.model';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { RecepieService } from '../recepie.service';
 
 @Component({
   selector: 'app-recepies-detail',
@@ -9,16 +10,28 @@ import { ShoppingListService } from '../../shopping-list/shopping-list.service';
   styleUrl: './recepies-detail.component.css'
 })
 export class RecepiesDetailComponent implements OnInit {
-  @Input() recepieReceivedFromParentList: recepie
-  constructor(private shoppingListService:ShoppingListService) { }
+  recepie: recepie
+  id: number;
+  constructor(private shoppingListService: ShoppingListService,
+    private recepieService: RecepieService,
+    private route: ActivatedRoute) { }
   ngOnInit(): void {
+    /* 
+    *we are trying to get the id from  url . we can do that by ActivatedRoute by taking a snapshot but that would only work when detail component is loaded other way is by
+    * subscribing to that since id would be changing and it needs to be updated with the current one
+    *params is an observable
+    *we add the + sign to convert it into a number as the params which we would be getting is a string
+    */
+    this.route.params
+      .subscribe(
+        (param: Params) => {
+          this.id = +param['id']
+          this.recepie=this.recepieService.getRecepieByIndex(this.id)
+        })
+  }
+  onAddToShoppingList() {
+    this.shoppingListService.AddIngredientsToShoppingList(this.recepie.ingredient)
+  }
 
-  }
-  onAddToShoppingList(){
-    // const ingName = this.recepieReceivedFromParentList.ingredient[0].name;
-    //  const ingAmount = this.recepieReceivedFromParentList.ingredient[1].amount;;
-    //  const newIngredient = new Ingredients(ingName, ingAmount)
-    //  this.shoppingListService.addItem(newIngredient)
-    this.shoppingListService.AddIngredientsToShoppingList(this.recepieReceivedFromParentList.ingredient)
-  }
+
 }

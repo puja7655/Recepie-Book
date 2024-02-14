@@ -35,4 +35,8 @@ new recepie('test recepie3', 'description3',
     return this.recepies.slice();
   }
 
+  getRecepieByIndex(index:number){
+    //Doing a shallow copy of recipes list here with the help of slice
+    return this.recepies.slice()[index]
+  }
 }

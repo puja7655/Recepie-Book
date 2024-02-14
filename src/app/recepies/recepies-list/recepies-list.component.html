@@ -6,7 +6,7 @@
 <hr>
 <div class="row">
     <div class="col-xs-12" >
-        <app-recepies-item *ngFor="let recepieEl of recepies" [recepie]="recepieEl"></app-recepies-item>
+        <app-recepies-item *ngFor="let recepieEl of recepies index as i" [recepie]="recepieEl" [index]="i"></app-recepies-item>
     </div>
 </div>
 

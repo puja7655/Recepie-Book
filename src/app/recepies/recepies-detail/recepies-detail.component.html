@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-xs-12">
-        <img [src]="recepieReceivedFromParentList.imgPath" alt="{{recepieReceivedFromParentList.imgPath}}"
+        <img [src]="recepie.imgPath" alt="{{recepie.imgPath}}"
             class="img-responsive" style="max-height: 300px;">
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <h1>{{recepieReceivedFromParentList.name}}</h1>
+        <h1>{{recepie.name}}</h1>
     </div>
 </div>
 <div class="row">
@@ -16,7 +16,7 @@
         <div class="btn-group" appDrpdown>
             <button type="button" class="btn btn-primary dropdown-toggle">Manage <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a style="cursor: pointer;" (click)="onAddToShoppingList()">Add to shopping list</a></li>
+                <li><a style="cursor: pointer" (click)="onAddToShoppingList()">Add to shopping list</a></li>
                 <li><a style="cursor:pointer">Edit recepie</a></li>
                 <li><a style="cursor:pointer">Delete recepie</a></li>
             </ul>
@@ -24,12 +24,12 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12">{{recepieReceivedFromParentList.description}}</div>
+    <div class="col-xs-12">{{recepie.description}}</div>
 </div>
 <div class="row">
     <div class="col-xs-12">
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let ingredient of recepieReceivedFromParentList.ingredient">
+            <li class="list-group-item" *ngFor="let ingredient of recepie.ingredient">
                 {{ingredient.name}} - {{ingredient.amount}}
             </li>
         </ul>
