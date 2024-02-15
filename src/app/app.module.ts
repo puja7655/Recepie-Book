@@ -22,6 +22,7 @@ import { InActiveComponent } from './assignment/in-active/in-active.component';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { RecepieStartComponent } from './recepies/recepie-start/recepie-start.component';
 import { RecepieEditComponent } from './recepies/recepie-edit/recepie-edit.component';
+import { FormComponent } from './assignment/form/form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { RecepieEditComponent } from './recepies/recepie-edit/recepie-edit.compo
     InActiveComponent,
     AssignmentComponent,
     RecepieStartComponent,
-    RecepieEditComponent
+    RecepieEditComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

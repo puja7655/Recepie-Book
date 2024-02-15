@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form (ngSubmit)="onSubmit()" #f="ngForm">
+            <div>
+                <div class="form-group" ngModelGroup="userData" #userData="ngModelGroup">
+                    <div class="col-xs-12 form-group">
+                        <label for="email">Email</label>:
+                        <input type="email" ngModel name="email" required email #email="ngModel" class="form-control" />
+                        <p *ngIf="!email.valid && email.touched">Please enter a valid Email</p>
+                    </div>
+                    <button type="button" class="btn btn-default" (click)="suggestEmail()">Suggest an email</button>
+                    <div class="form-group col-xs-12">
+                        <label for="suscriptions">Choose a Subscription</label>:
+                        <select [ngModel]="defaultValue" name="suscriptions" id="subscription" ngModel
+                            name="subscription" class="form-control">
+                            <option value="basic">Basic</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="pro">Pro</option>
+                        </select>
+                    </div>
+                </div>
+                <p *ngIf="!userData.valid && userData.touched">Enter valid user Data</p>
+                <div class="col-xs-12 form-group">
+                    <label>Password</label>:
+                    <input type="password" id="password" ngModel name="password" required class="form-control" />
+                </div>
+                <textarea name="questionAnswer" id="questionAnswer" rows="2" [(ngModel)]="answer"
+                    class="col-xs-12 form-group form-control"></textarea>
+                <p>Your Reply {{answer}}</p>
+            </div>
+            <div class="radio col-xs-12" *ngFor="let gender of genders">
+                <label>
+                    <input type="radio" name="radio" ngModel [value]="gender">
+                    {{gender}}
+                </label>
+            </div>
+            <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Your Data</h3>
+        <p>Email:{{user.email}}</p>
+        <p>Suscription:{{user.subscription}}</p>
+        <p>reply:{{user.answer}}</p>
+        <p>gender:{{user.gender}}</p>
+    </div>
+</div>
