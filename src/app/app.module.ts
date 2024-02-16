@@ -3,7 +3,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ServerComponent } from './servers/server/server.component';
 import { HeaderComponent } from './header/header.component';
 import { RecepiesComponent } from './recepies/recepies.component';
@@ -50,7 +50,8 @@ import { FormComponent } from './assignment/form/form.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration()

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -7,33 +8,65 @@ import { NgForm } from '@angular/forms';
   styleUrl: './form.component.css'
 })
 export class FormComponent implements OnInit {
-  defaultValue = "basic"
-  answer = ''
+
   genders = ['male', 'female']
-  @ViewChild('f') signUpForm: NgForm
-  user = {
-    email: '',
-    subscription: '',
-    answer: '',
-    gender: ''
-  }
+  signUpForm: FormGroup
+  forbiddenUserNames = ['chris', 'ana']
   constructor() { }
   ngOnInit(): void {
-
-  }
-  suggestEmail() {
-    const sugestedEmail = 'puja.singh7655@gmail.com'
-    this.signUpForm.form.patchValue({
+    this.signUpForm = new FormGroup({
+      'userData': new FormGroup({
+        'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
+        'email': new FormControl(null, [Validators.required, Validators.email], this.forbiddenEmails),
+      }),
+      'gender': new FormControl('male'),
+      'hobbies': new FormArray([])
+    });
+    this.signUpForm.statusChanges.subscribe((value) => {
+      console.log(value)
+    })
+    this.signUpForm.patchValue({
       userData: {
-        email: sugestedEmail,
+        username: 'puja'
       }
     })
   }
   onSubmit() {
-    console.log("xyz", this.signUpForm)
-    this.user.email=this.signUpForm.form.value.userData.email
-    this.user.subscription=this.signUpForm.form.value.userData.subscription
-    this.user.answer=this.signUpForm.form.value.questionAnswer
-    this.user.email=this.signUpForm.form.value.userData.radio
+    console.log(this.signUpForm)
+    this.signUpForm.reset({
+      gender:'male' //passing an object in reset to not reset this specific value
+    })
+  }
+
+  addHobby() {
+    const control = new FormControl(null, Validators.required);
+    (<FormArray>this.signUpForm.get('hobbies')).push(control)
+  }
+
+  getControls() {
+    return (<FormArray>this.signUpForm.get('hobbies')).controls;
+  }
+
+  //custom validators
+  forbiddenNames(control: FormControl): { [s: string]: boolean } { // it takes inn control and return an object which has key value pair and key is of type string
+    if (this.forbiddenUserNames.indexOf(control.value) !== -1) {
+      return { 'nameIsForbidden': true };
+    } else {
+      return null
+    }
+  }
+
+  //making custom async validators
+  forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'test2@test.com') {
+          resolve({ 'forbiddenEmail': true })
+        } else {
+          resolve(null)
+        }
+      }, 1000)
+    })
+    return promise
   }
 }
