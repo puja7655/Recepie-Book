@@ -35,12 +35,12 @@ export class RecepiesDetailComponent implements OnInit {
     this.router.navigate(['edit'], { relativeTo: this.route });
     /*Here we are going one level up , then setting id in the Url and the adding edit but in the above way since 
       *we are already in details page id is already present in the usrl we just need to add edit in the url*/
-     
+
     //this.router.navigate(['../',this.id,'edit'],{relativeTo:this.route})
   }
 
   onAddToShoppingList() {
-    this.shoppingListService.AddIngredientsToShoppingList(this.recepie.ingredient)
+    this.shoppingListService.addIngredientsToShoppingList(this.recepie.ingredient)
   }
 
 

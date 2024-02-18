@@ -6,7 +6,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ShoppingListService {
-  ingredientsChanged = new Subject<Ingredients[]>()
+  //this listens to any change in actual ingredient list and always contains the latest list. 
+  //That is why to keep the updated list all the time it is called after every update or change iningredientList
+  ingredientsChanged = new Subject<Ingredients[]>() 
+  startedEditing = new Subject<number>()
   ingredients: Ingredients[] = [
     new Ingredients('Apples', 5),
     new Ingredients('Oranges', 6)
@@ -22,8 +25,18 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice())
   }
 
-  AddIngredientsToShoppingList(ingredient: Ingredients[]) {
+  addIngredientsToShoppingList(ingredient: Ingredients[]) {
     this.ingredients.push(...ingredient) //spread operator as we want to convert array to list so that push method can handle this. or else it would push by converting array into object
+    this.ingredientsChanged.next(this.ingredients.slice())
+  }
+
+  updateIngredients(index: number, newIngredient: Ingredients) {
+    this.ingredients[index] = newIngredient;
+    this.ingredientsChanged.next(this.ingredients.slice())
+  }
+
+  deleteIngredient(index: number) {
+    this.ingredients.splice(index, 1)
     this.ingredientsChanged.next(this.ingredients.slice())
   }
 }
