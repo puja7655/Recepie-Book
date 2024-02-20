@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecepieService } from '../recepie.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class RecepieEditComponent implements OnInit {
   recepieForm!: FormGroup
 
   constructor(private route: ActivatedRoute,
-    private recepieService: RecepieService) { }
+    private recepieService: RecepieService,
+    private router: Router) { }
   ngOnInit(): void {
     this.route.params
       .subscribe(
@@ -31,7 +32,7 @@ export class RecepieEditComponent implements OnInit {
     let recepieDescription = ''
     let recepieImgPath = ''
     //let recepieIngredient = new FormArray([])
-    let recepieIngredient:any = new FormArray([])
+    let recepieIngredient: any = new FormArray([])
     if (this.editMode) {
       const recepie = this.recepieService.getRecepieByIndex(this.id)
       console.log("recepie", recepie)
@@ -64,12 +65,25 @@ export class RecepieEditComponent implements OnInit {
     }))
   }
 
+  onDeleteIngredient(ingIndex: number) {
+   (<FormArray>this.recepieForm.get('ingredients')).removeAt(ingIndex)
+  }
+
   get controls() { // a getter!
     return (<FormArray>this.recepieForm.get('ingredients')).controls;
   }
 
   onSubmit() {
-    console.log(this.recepieForm)
+    if (this.editMode) {
+      this.recepieService.updateRecepie(this.id, this.recepieForm.value)
+    } else {
+      this.recepieService.addRecepie(this.recepieForm.value)
+    }
+    this.onCancel()
+  }
+
+  onCancel() {
+    this.router.navigate(['../'],{relativeTo:this.route})
   }
 
 }

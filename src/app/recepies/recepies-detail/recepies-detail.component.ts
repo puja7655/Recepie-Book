@@ -10,8 +10,8 @@ import { RecepieService } from '../recepie.service';
   styleUrl: './recepies-detail.component.css'
 })
 export class RecepiesDetailComponent implements OnInit {
-  recepie: recepie
-  id: number;
+  recepie!: recepie
+  id!: number;
   constructor(private shoppingListService: ShoppingListService,
     private recepieService: RecepieService,
     private router: Router,
@@ -37,6 +37,11 @@ export class RecepiesDetailComponent implements OnInit {
       *we are already in details page id is already present in the usrl we just need to add edit in the url*/
 
     //this.router.navigate(['../',this.id,'edit'],{relativeTo:this.route})
+  }
+
+  onDeleteRecepie(){
+   this.recepieService.deleteRecepie(this.id)
+   this.router.navigate(['/recepies'])
   }
 
   onAddToShoppingList() {

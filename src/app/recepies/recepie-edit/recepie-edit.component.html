@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <button [disabled]="!recepieForm.valid" type="submit" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-danger">Cancel</button>
+                    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
                 </div>
             </div>
             <div class="row">
@@ -29,13 +29,14 @@
                     type="text" 
                     id="imgPath" 
                     class="form-control"
-                    formControlName="imgPath">                       
+                    formControlName="imgPath"
+                    #imgPath>                       
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <img src="" class="img-responsive">
+                    <img [src]="imgPath.value" class="img-responsive">
                 </div>
             </div>
             <div class="row">
@@ -69,7 +70,7 @@
                             formControlName="amount">
                         </div>
                         <div class="col-xs-2">
-                            <button class="btn btn-danger">X</button>
+                            <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
                         </div>
                     </div>
                 </div>
