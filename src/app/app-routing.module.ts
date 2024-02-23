@@ -14,7 +14,7 @@ const routes: Routes = [
       { path: '', component: RecepieStartComponent },
       { path: 'new', component: RecepieEditComponent },
       { path: ':id', component: RecepiesDetailComponent },
-      { path: ':id/edit', component: RecepieEditComponent,pathMatch:'full' },
+      { path: ':id/edit', component: RecepieEditComponent, pathMatch: 'full' },
     ]
   },
   { path: 'shopoping-list', component: ShoppingListComponent }];
