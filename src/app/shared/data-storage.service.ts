@@ -1,4 +1,4 @@
-//Fetch data from backend (for this project i have set firefox backend)
+//Fetch data from backend (for this project i have set firebase backend)
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { recepie } from '../recepies/recepie.model';
@@ -22,6 +22,8 @@ export class DataStorageService {
   }
 
   fetchRecepie() {
+
+    // Here in the response i am adding a pipe to add ingredient array tomaintain the flow if user have not added that while create a new recpie 
     this.http.get<recepie[]>('https://ng-recepie-book-b3b71-default-rtdb.firebaseio.com/recepies.json')
       .pipe(
         map(recepies => {

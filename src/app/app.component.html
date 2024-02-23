@@ -1,4 +1,3 @@
-<!-- <app-server></app-server> -->
 <app-header></app-header>
 <div class="container">
   <div class="row">
@@ -11,28 +10,3 @@
     </div>
   </div>
 </div>
-
-
-<hr>
-Assignment
-<div class="row">
-  <div class="col-xs-12">
-    <app-game-control (intervalFired)="intervalValFired($event)"></app-game-control>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <app-odd *ngFor="let oddNumber of oddNumbers"[number]="oddNumber"></app-odd>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <app-even *ngFor="let evenNumber of evenNumbers"[number]="evenNumber"></app-even>
-  </div>
-</div>
-
-<app-form></app-form>
-
-<app-assignment></app-assignment>
